@@ -11,8 +11,17 @@
 <script src="./scripts/dothtml.js" ></script>
 <script src="./scripts/dotcss.js" ></script>
 <script src="./scripts/Sequencr.js"></script>
+<script src="./scripts/Wallet.js"></script>
 
 <link rel="stylesheet" type="text/css" href="./styles/style.css">
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-6712057098655965",
+          enable_page_level_ads: true
+     });
+</script>
 
 <body>
 
@@ -82,6 +91,19 @@ function generatebuild(){
 	)
 }
 
+function selectText(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select();
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+        }
+    }
+
 dot.createWidget("choice", function(url, size){
 	return dot.div().class("choice").style(dotcss.backgroundImage(url).width(size));
 });
@@ -93,6 +115,20 @@ dot.createWidget("category", function(name, contents){
 	).class("category");
 });
 
+dot.createWidget("supportbtn", function(title, icon, url, coinAddress){
+	return dot.button().title(title).style(dotcss.display("inline-block").width(48).height(48).cursor("pointer").backgroundImage(icon).backgroundSize("contain")).onclick(function(){
+		if(url){
+			window.open(url, "_blank");
+		}
+		else{
+			dot("#coinimg").empty().img().src(icon)
+			dot("#cointype").empty().h(title)
+			dot("#coinaddr").empty().h(coinAddress)
+			dotcss("#cryptodonate").fadeIn();
+		}
+	})
+});
+
 dot("body").div(
 	dot.br().br()
 	.div("Try the <b><a href=\"http://gats.io\" target=\"_blank\">Gats.io</a> random upgrade challenge</b>! Tweet videos of your build to <a href=\"http://twitter.com/joshsideris\" target=\"_blank\">@joshsideris</a> so that I can feature your vid on this page!").style(dotcss.fontSize(36).paddingLeftP(25).widthP(50).textAlign("center"))
@@ -101,33 +137,46 @@ dot("body").div(
 	.br().br().br()
 	.div().id("build-output").style(dotcss.height(170))
 ).style(dotcss.widthP(100).textAlign("center"))
-.br().br().br()
+.br()
+.div(
+	dot.div(
+		dot.div("Support this app and others like it!")
+		.supportbtn("Patreon", "./images/supporticons/patreon.png", "https://patreon.com/jsideris")
+		.supportbtn("Bitcoin", "./images/supporticons/bitcoin.png", null, "182tfHxo1Y3bpDqijCy57LiEDheWjbtRS8")
+		.supportbtn("Bitcoin Cash", "./images/supporticons/bitcoincash.png", null, "15YMbexTPHaT9uv3Bgd1nCdckvFkDYWhU5")
+		.supportbtn("Etherium", "./images/supporticons/ethereum.png", null, "0x084f86eef4e12193c037300b1d79e9afa85525f9")
+		.supportbtn("Litecoin", "./images/supporticons/litecoin.png", null, "La1ar7NoPNQBy6MBoC4yT5miJnnSUajc35")
+	).style(dotcss.display("inline"))
+).style(dotcss.widthP(100).textAlign("center"))
+.br()
 .a("Made by Bizorke").href("https://youtube.com/bizorke").target("_blank").style(dotcss.position("fixed").bottom(50).right(50))
+.div(
+	dot.div(
+		dot.div().id("coinimg")
+		.br()
+		.span().id("cointype")
+		.span(": ")
+		.span().id("coinaddr").style(dotcss.fontSize(16).lineHeight(36).cursor("pointer")).onclick("selectText('coinaddr');")
+	).style(dotcss.position("absolute").leftP(25).topP(25).widthP(50).heightP(50).backgroundColor("white").borderRadius(5).padding(20).fontSize(36)).onclick(function(e){event.stopPropagation();})
+).id("cryptodonate").style(dotcss.position("fixed").display("none").top(0).bottom(0).left(0).right(0).backgroundColor(0,0,0,0.5)).onclick(function(){
+	dotcss("#cryptodonate").fadeOut();
+})
 </script>
 
 <!-- AddToAny BEGIN -->
 <div>
-<div style="margin: 0 auto;width:288px">
-<a href="https://www.addtoany.com/share?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/a2a.svg" width="32" height="32" style="background-color:blue"></a>
-<a href="https://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/twitter.svg" width="32" height="32" style="background-color:blue"></a>
-<a href="https://www.addtoany.com/add_to/google_plus?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/google_plus.svg" width="32" height="32" style="background-color:blue"></a>
-<a href="https://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:blue"></a>
-<a href="https://www.addtoany.com/add_to/email?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/email.svg" width="32" height="32" style="background-color:blue"></a>
-<a href="https://www.addtoany.com/add_to/reddit?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/reddit.svg" width="32" height="32" style="background-color:blue"></a>
-<a href="https://www.addtoany.com/add_to/blogger?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/blogger.svg" width="32" height="32" style="background-color:blue"></a>
-<a href="https://www.addtoany.com/add_to/wordpress?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/wordpress.svg" width="32" height="32" style="background-color:blue"></a>
-</div>
+	<div style="margin: 0 auto;width:288px">
+		<a href="https://www.addtoany.com/share?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/a2a.svg" width="32" height="32" style="background-color:blue"></a>
+		<a href="https://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/twitter.svg" width="32" height="32" style="background-color:blue"></a>
+		<a href="https://www.addtoany.com/add_to/google_plus?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/google_plus.svg" width="32" height="32" style="background-color:blue"></a>
+		<a href="https://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/facebook.svg" width="32" height="32" style="background-color:blue"></a>
+		<a href="https://www.addtoany.com/add_to/email?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/email.svg" width="32" height="32" style="background-color:blue"></a>
+		<a href="https://www.addtoany.com/add_to/reddit?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/reddit.svg" width="32" height="32" style="background-color:blue"></a>
+		<a href="https://www.addtoany.com/add_to/blogger?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/blogger.svg" width="32" height="32" style="background-color:blue"></a>
+		<a href="https://www.addtoany.com/add_to/wordpress?linkurl=http%3A%2F%2Fjsideris.com%2Fgats.io&amp;linkname=" target="_blank"><img src="https://static.addtoany.com/buttons/wordpress.svg" width="32" height="32" style="background-color:blue"></a>
+	</div>
 </div>
 <!-- AddToAny END -->
-
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-6712057098655965",
-          enable_page_level_ads: true
-     });
-</script>
 </body>
 
 

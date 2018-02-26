@@ -31,3 +31,7 @@
 .a2a_default_style>a {
 	text-align: center;
 }
+
+.donatebtn{
+	display: inline-block;
+}
