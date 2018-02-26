@@ -11,6 +11,7 @@
 <script src="./scripts/dothtml.js" ></script>
 <script src="./scripts/dotcss.js" ></script>
 <script src="./scripts/Sequencr.js"></script>
+<script src="./scripts/donate.js"></script>
 
 <link rel="stylesheet" type="text/css" href="./styles/style.css">
 
@@ -25,6 +26,10 @@
 <body>
 
 <script>
+var allVids = [
+	
+];
+
 var allguns = [
 	"assault.png",
 	"machinegun.png",
@@ -90,42 +95,15 @@ function generatebuild(){
 	)
 }
 
-function selectText(containerid) {
-        if (document.selection) {
-            var range = document.body.createTextRange();
-            range.moveToElementText(document.getElementById(containerid));
-            range.select();
-        } else if (window.getSelection) {
-            var range = document.createRange();
-            range.selectNode(document.getElementById(containerid));
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-        }
-    }
-
 dot.createWidget("choice", function(url, size){
 	return dot.div().class("choice").style(dotcss.backgroundImage(url).width(size));
 });
 
 dot.createWidget("category", function(name, contents){
 	return dot.div(
-		dot.span(name).style(dotcss.position("absolute").top(-20).fontWeight("bold"))
+		dot.span(name).style(dotcss.position("absolute").display("inline-block").height(150).top(-20).fontWeight("bold"))
 		.h(contents)
 	).class("category");
-});
-
-dot.createWidget("supportbtn", function(title, icon, url, coinAddress){
-	return dot.button().title(title).style(dotcss.display("inline-block").width(48).height(48).cursor("pointer").backgroundImage(icon).backgroundSize("contain")).onclick(function(){
-		if(url){
-			window.open(url, "_blank");
-		}
-		else{
-			dot("#coinimg").empty().img().src(icon)
-			dot("#cointype").empty().h(title)
-			dot("#coinaddr").empty().h(coinAddress)
-			dotcss("#cryptodonate").fadeIn();
-		}
-	})
 });
 
 dot("body").div(
@@ -134,32 +112,14 @@ dot("body").div(
 	.br().br().br()
 	.button("Generate Build").class("build-button").onclick(generatebuild)
 	.br().br().br()
-	.div().id("build-output").style(dotcss.height(170))
+	.div(
+		dot.div().id("build-output").style(dotcss.display("inline-block")/*.width(621).height(170)*/)
+	)//.style(dotcss.height(170))
 ).style(dotcss.widthP(100).textAlign("center"))
 .br()
-.div(
-	dot.div(
-		dot.div("Support this app and others like it!")
-		.supportbtn("Patreon", "./images/supporticons/patreon.png", "https://patreon.com/jsideris")
-		.supportbtn("Bitcoin", "./images/supporticons/bitcoin.png", null, "182tfHxo1Y3bpDqijCy57LiEDheWjbtRS8")
-		.supportbtn("Bitcoin Cash", "./images/supporticons/bitcoincash.png", null, "15YMbexTPHaT9uv3Bgd1nCdckvFkDYWhU5")
-		.supportbtn("Etherium", "./images/supporticons/ethereum.png", null, "0x084f86eef4e12193c037300b1d79e9afa85525f9")
-		.supportbtn("Litecoin", "./images/supporticons/litecoin.png", null, "La1ar7NoPNQBy6MBoC4yT5miJnnSUajc35")
-	).style(dotcss.display("inline"))
-).style(dotcss.widthP(100).textAlign("center"))
+.allsupportbuttons("Support this app and others like it!")
 .br()
 .a("Made by Bizorke").href("https://youtube.com/bizorke").target("_blank").style(dotcss.position("fixed").bottom(50).right(50))
-.div(
-	dot.div(
-		dot.div().id("coinimg")
-		.br()
-		.span().id("cointype")
-		.span(": ")
-		.span().id("coinaddr").style(dotcss.fontSize(16).lineHeight(36).cursor("pointer")).onclick("selectText('coinaddr');")
-	).style(dotcss.position("absolute").leftP(25).topP(25).widthP(50).heightP(50).backgroundColor("white").borderRadius(5).padding(20).fontSize(36)).onclick(function(e){event.stopPropagation();})
-).id("cryptodonate").style(dotcss.position("fixed").display("none").top(0).bottom(0).left(0).right(0).backgroundColor(0,0,0,0.5)).onclick(function(){
-	dotcss("#cryptodonate").fadeOut();
-})
 </script>
 
 <!-- AddToAny BEGIN -->
