@@ -12,6 +12,7 @@
 <script src="./scripts/dotcss.js" ></script>
 <script src="./scripts/Sequencr.js"></script>
 <script src="./scripts/donate.js"></script>
+<script src="./scripts/videoplayer.js"></script>
 
 <link rel="stylesheet" type="text/css" href="./styles/style.css">
 
@@ -27,8 +28,14 @@
 
 <script>
 var allVids = [
-	
+	"mj2sq3Vj1tc", "VgH7VFLocbk", "X1rCGBOaxY4", "UI0p0859XRQ", "J6f6_0ujcHQ"
 ];
+
+var videoSelection = [];
+do{
+	var sample = allVids[Math.floor(Math.random() * allVids.length)];
+	if(videoSelection.indexOf(sample) == -1) videoSelection.push(sample);
+}while(videoSelection.length < 5 && videoSelection.length < allVids.length)
 
 var allguns = [
 	"assault.png",
@@ -118,6 +125,9 @@ dot("body").div(
 ).style(dotcss.widthP(100).textAlign("center"))
 .br()
 .allsupportbuttons("Support this app and others like it!")
+.br()
+.span("Since no one has submitted any videos yet, here's a selection of mine.").br()
+.div(dot.videolist(videoSelection, 5)).id("video-list")
 .br()
 .a("Made by Bizorke").href("https://youtube.com/bizorke").target("_blank").style(dotcss.position("fixed").bottom(50).right(50))
 </script>
